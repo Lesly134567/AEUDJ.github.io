@@ -1,7 +1,8 @@
 <?php
 session_start();
 include 'db.php';
-// Si ya votó hoy, redirige a lista sin botón
+
+// Si ya votó redirige a lista sin botón 
 $check = $pdo->prepare("SELECT 1 FROM votos WHERE usuario_id = ? AND fecha = CURDATE() LIMIT 1");
 $check->execute([$_SESSION['user_id']]);
 if ($check->fetch()) {
@@ -27,7 +28,7 @@ $transportSchedules = [
     ["time" => "10:00 PM", "route" => "La Vega → Jarabacoa", "fullText" => "10:00 PM La Vega → Jarabacoa"]
 ];
 
-// Procesar formulario
+
 if ($_POST) {
     $horarios = $_POST['horarios'] ?? [];
 
@@ -120,11 +121,11 @@ if ($_POST) {
       </button>
     </div>
 
-    <!-- Campos ocultos con los horarios elegidos -->
+
     <div id="horariosSeleccionados"></div>
   </form>
 
-  <!-- Mensaje de estado -->
+  
   <div id="status-message" class="text-center text-sm font-medium mt-4"></div>
 </main>
 
@@ -132,10 +133,9 @@ if ($_POST) {
   let seleccionados = [];
 
   function toggleSlot(el, fullText, direction) {
-    // Quitar selección previa del mismo tipo
     seleccionados = seleccionados.filter(h => !h.includes(direction === 'ida' ? 'Jarabacoa → La Vega' : 'La Vega → Jarabacoa'));
 
-    // Marcar nuevo
+    
     el.classList.add('selected');
     el.querySelector('.checkmark').textContent = '✅';
     seleccionados.push(fullText);
@@ -173,4 +173,5 @@ if ($_POST) {
   }
 </script>
 </body>
+
 </html>
