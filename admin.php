@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-// Login simple (usuario: admin, clave: aeudj2025)
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $_POST['user'] ?? '';
     $pass = $_POST['pass'] ?? '';
@@ -14,9 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = "Usuario o clave incorrectos.";
 }
 
-// Si ya está logueado, muestra el panel
 if (!isset($_SESSION['admin'])) {
-    // Mostrar formulario de login
+    
     exit('
 <!doctype html>
 <html lang="es" class="h-full">
@@ -168,4 +167,5 @@ foreach ($horarios as $h) {
     </div>
   </main>
 </body>
+
 </html>
