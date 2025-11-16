@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-// COOKIE: si ya hay nombre guardado, entra directo
+
 if (isset($_COOKIE['aeudj_nombre'])) {
     $nombre = $_COOKIE['aeudj_nombre'];
     $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE nombre = ?");
@@ -21,11 +21,10 @@ if (isset($_COOKIE['aeudj_nombre'])) {
     exit;
 }
 
-// Procesar nuevo registro
 if ($_POST) {
     $nombre = trim($_POST['nombre'] ?? '');
 
-    // Verificar si nombre ya existe
+    // Verifica si el nombre ya existe
     $check = $pdo->prepare("SELECT id FROM usuarios WHERE nombre = ?");
     $check->execute([$nombre]);
     if ($check->fetch()) {
@@ -81,4 +80,5 @@ if ($_POST) {
     </div>
   </main>
 </body>
+
 </html>
